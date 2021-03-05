@@ -55,10 +55,29 @@ publishing {
                 classifier = 'javadoc'
             }
 
-
+            // create the signed artifacts
+            project.tasks.signArchives.signatureFiles.each {
+                artifact(it) {
+                    def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
+                    if (matcher.find()) {
+                        classifier = matcher.group(1)
+                    } else {
+                        classifier = null
+                    }
+                    extension = 'jar.asc'
+                }
+            }
         }
     }
-
+    repositories {
+        maven {
+            url nexusURL
+            credentials {
+                username nexusUser
+                password nexusPassword
+            }
+        }
+    }
 }
 
 def customizePom(pom) {
@@ -108,5 +127,16 @@ def customizePom(pom) {
     }
 }
 
+model {
+    tasks.generatePomFileForMavenJavaPublication {
+        destination = file("$buildDir/generated-pom.xml")
+    }
+    tasks.publishMavenJavaPublicationToMavenLocal {
+        dependsOn project.tasks.signArchives
+    }
+    tasks.publishMavenJavaPublicationToMavenRepository {
+        dependsOn project.tasks.signArchives
+    }
+}
 
 

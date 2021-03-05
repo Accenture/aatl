@@ -1,16 +1,11 @@
 apply plugin: 'java-library'
 apply plugin: 'java'
 apply from: 'publish.gradle'
-apply plugin: "maven"
-version="0.0.1.001"
 
 repositories {
     mavenLocal()
     mavenCentral()
     jcenter()
-    maven {
-        url  "https://dl.bintray.com/epam/healenium"
-    }
 }
 configurations.all {
 	// Check for snapshot updates every build
@@ -19,7 +14,8 @@ configurations.all {
 
 dependencies {
 	compile group: 'com.accenture.atom', name: 'library-api', version: '0.0.1', changing:true
-	compile group: 'com.accenture.atom', name: 'library-selenium', version: '0.0.1.001', changing:true
+	compile group: 'com.accenture.atom', name: 'library-selenium', version: '0.0.1', changing:true
+
     compile group: 'io.cucumber', name: 'cucumber-testng', version: '4.7.2'
     compile group: 'io.cucumber', name: 'cucumber-java8', version: '4.7.2'
     compile group: 'io.cucumber', name: 'cucumber-picocontainer', version: '4.7.2'

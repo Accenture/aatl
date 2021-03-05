@@ -116,10 +116,6 @@ public class DriverFactory {
                     case "htmlunit":
                         driverManager.set(new HTMLUnitDriverManager());
                         break;
-
-                    case "HealiumChrome":
-                        driverManager.set(new HealeniumDriverManager());
-                        break;
                 }
                 break;
         }

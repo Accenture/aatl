@@ -155,20 +155,6 @@ public class PageObject {
     public Element $(By by) {
         return findElement(by);
     }
-    public Element $(String queryString) {
-
-        return findElementSlow(queryString);
-    }
-
-    private Element findElement(String queryString) {
-        return new Element(this.driver,(WebElement) ((JavascriptExecutor)this.driver).executeScript(queryString,new Object[0]));
-    }
-
-    private Element findElementSlow(String queryString) {
-        Element tmpElement = new Element(this.driver,(WebElement) ((JavascriptExecutor)this.driver).executeScript(queryString,new Object[0]));
-        return findElement(tmpElement.by());
-    }
-
 
     /**
      * return first element using a locator type (from enum), string locator value and optional tokens to

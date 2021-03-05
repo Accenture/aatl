@@ -1,11 +1,9 @@
 package steps;
 
 import automation.library.cucumber.selenium.BaseSteps;
-import automation.library.reporting.Reporter;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import pageobjects.RegisterInterest;
 
 import java.util.Map;
@@ -18,19 +16,13 @@ public class RegisterInterestSteps extends BaseSteps {
 public void launchApplication(DataTable table) throws Throwable {
 	Map<String, String> map = table.asMap(String.class, String.class);
 	ri = new RegisterInterest();
-	ri.registerInterest(map);
-
-	sa().assertEquals("Hello","Hello",Reporter.getCurrentStep().fail("Fail Message").toString());
+	ri.registerInterest(map);	
 }
 
 @Then("^a confirmation message is displayed \"(.*)\"$")
 public void checkPageDisplay(String expectedMsg) throws Throwable {
 	ri.waitPageToLoad();
-	sa().assertEquals("hello3","222Hello","ReportPoint123465");
-
 	sa().assertEquals(ri.getResponse(), expectedMsg);
 	sa().assertAll();
-
-
 }
 }	

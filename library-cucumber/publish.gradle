@@ -68,7 +68,15 @@ publishing {
             }
         }
     }
-
+    repositories {
+        maven {
+            url nexusURL
+            credentials {
+                username nexusUser
+                password nexusPassword
+            }
+        }
+    }
 }
 
 def customizePom(pom) {
@@ -122,7 +130,12 @@ model {
     tasks.generatePomFileForMavenJavaPublication {
         destination = file("$buildDir/generated-pom.xml")
     }
-
+    tasks.publishMavenJavaPublicationToMavenLocal {
+        dependsOn project.tasks.signArchives
+    }
+    tasks.publishMavenJavaPublicationToMavenRepository {
+        dependsOn project.tasks.signArchives
+    }
 }
 
 

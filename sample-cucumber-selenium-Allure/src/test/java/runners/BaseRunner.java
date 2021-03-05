@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.AfterTest;
 
 @CucumberOptions(
-        //plugin = {"io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm","json:RunReports/cucumberJson/cucumber-report.json"},
+        plugin = {"io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm","json:RunReports/cucumberJson/cucumber-report.json"},
         features = {"classpath:features"},
         glue = {"steps", "hooks"}
         )
